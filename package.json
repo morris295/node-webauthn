@@ -1,0 +1,27 @@
+{
+  "name": "node-webauthn",
+  "version": "1.0.0",
+  "description": "A webauthn library written in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Webauthn"
+  ],
+  "author": "Jesse Morris",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.3",
+    "@types/base64url": "^2.0.0",
+    "@types/cbor": "^5.0.0",
+    "@types/node": "^12.12.17"
+  },
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "cbor": "^5.0.1",
+    "eccrypto": "^1.1.2"
+  }
+}
