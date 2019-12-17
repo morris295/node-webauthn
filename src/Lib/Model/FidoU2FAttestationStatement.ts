@@ -2,21 +2,18 @@ import base64url from "base64url";
 import * as cbor from "cbor";
 import * as crypto from "crypto";
 import { CryptoUtility } from "../../Utilities/CryptoUtility";
-import { AttestationStatement } from "./AttestationStatement";
 import { AuthenticatorData } from "./AuthenticatorData";
 import { CollectedClientData } from "./CollectedClientData";
-import { ICborAttestation } from "./ICborAttestation";
+import { IAttestationStatement } from "./IAttestationStatement";
 
 export class FidoU2FAttestationStatement
-    extends AttestationStatement
-    implements ICborAttestation {
+    implements IAttestationStatement {
 
     public caCert: Buffer[];
     public signature: Buffer;
     public attestationCertificate: Buffer[];
 
     constructor() {
-        super();
         this.caCert = [];
     }
 
@@ -50,7 +47,7 @@ export class FidoU2FAttestationStatement
      * @param {AuthenticatorData} authenticatorData
      */
     public async validateSignature(collectedClientData: CollectedClientData,
-                                   authenticatorData: AuthenticatorData): Promise<boolean> {
+                                   authenticatorData: AuthenticatorData): Promise<any> {
         let result: boolean = false;
         const response: any = {};
         const aaguidTest: Buffer = Buffer.from([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

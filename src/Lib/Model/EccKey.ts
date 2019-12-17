@@ -4,9 +4,57 @@ import { CredentialPublicKey } from "./CredentialPublicKey";
 
 export class EccKey extends CredentialPublicKey {
 
-   public curve: number;
-   public x: Buffer;
-   public y: Buffer;
+   private curve: number;
+   private x: Buffer;
+   private y: Buffer;
+
+    /**
+     * Getter $curve
+     * @return {number}
+     */
+    public get $curve(): number {
+        return this.curve;
+    }
+
+    /**
+     * Setter $curve
+     * @param {number} value
+     */
+    public set $curve(value: number) {
+        this.curve = value;
+    }
+
+    /**
+     * Getter $x
+     * @return {Buffer}
+     */
+    public get $x(): Buffer {
+        return this.x;
+    }
+
+    /**
+     * Setter $x
+     * @param {Buffer} value
+     */
+    public set $x(value: Buffer) {
+        this.x = value;
+    }
+
+    /**
+     * Getter $y
+     * @return {Buffer}
+     */
+    public get $y(): Buffer {
+        return this.y;
+    }
+
+    /**
+     * Setter $y
+     * @param {Buffer} value
+     */
+    public set $y(value: Buffer) {
+        this.y = value;
+    }
 
    public getAsBuffer(): Buffer {
        let tag: Buffer;
@@ -14,5 +62,3 @@ export class EccKey extends CredentialPublicKey {
        return Buffer.concat([tag, this.x, this.y]);
    }
 }
-
-module.exports = EccKey;

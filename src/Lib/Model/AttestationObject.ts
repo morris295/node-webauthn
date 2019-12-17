@@ -1,7 +1,8 @@
 import base64url from "base64url";
 import * as cbor from "cbor";
-import { AttestationStatement } from "./AttestationStatement";
 import { AuthenticatorData } from "./AuthenticatorData";
+import { FidoU2FAttestationStatement } from "./FidoU2FAttestationStatement";
+import { IAttestationStatement } from "./IAttestationStatement";
 
 export class AttestationObject {
 
@@ -15,12 +16,42 @@ export class AttestationObject {
             result.authenticatorData = await
                 AuthenticatorData.decode(decoded[0].authData);
             result.attestationStatement = await
-                AttestationStatement.decode(result.format, decoded[0].attStmt);
+                this.decodeAttestationStatement(result.format, decoded[0].attStmt);
 
             return result;
         } catch (error) {
             throw error;
         }
+    }
+
+    private static async decodeAttestationStatement(format: string,
+                                                    attestationStatement: IAttestationStatement) {
+
+        let statement = null;
+        switch (format) {
+            case "fido-u2f":
+                statement = new FidoU2FAttestationStatement();
+                await statement.decode(attestationStatement);
+                break;
+            // case "android-safetynet":
+            //     statement = new AndroidSafetynetAttestationStatement();
+            //     await statement.decode(attestationStatement);
+            //     break;
+            // case "packed":
+            //     statement = new PackedAttestationStatement();
+            //     await statement.decode(attestationStatement);
+            //     break;
+            // case "tpm":
+            //     statement = new TpmAttestationStatement();
+            //     await statement.decode(attestationStatement);
+            //     break;
+            // case "none":
+            //     statement = new NoneAttestationStatement();
+            //     await statement.decode(attestationStatement);
+            //     break;
+        }
+
+        return statement;
     }
 
     /**
@@ -59,7 +90,7 @@ export class AttestationObject {
      * Getter $attestationStatement
      * @return {AttestationStatement}
      */
-    public get $attestationStatement(): AttestationStatement {
+    public get $attestationStatement(): IAttestationStatement {
         return this.attestationStatement;
     }
 
@@ -67,11 +98,11 @@ export class AttestationObject {
      * Setter $attestationStatement
      * @param {AttestationStatement} value
      */
-    public set $attestationStatement(value: AttestationStatement) {
+    public set $attestationStatement(value: IAttestationStatement) {
         this.attestationStatement = value;
     }
 
     private authenticatorData: AuthenticatorData;
     private format: string;
-    private attestationStatement: AttestationStatement;
+    private attestationStatement: IAttestationStatement;
 }

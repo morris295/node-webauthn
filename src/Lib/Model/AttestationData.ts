@@ -1,3 +1,4 @@
+import { PublicKeyDecodeUtility } from "../../Utilities/PublicKeyDecodeUtility";
 import { CredentialPublicKey } from "./CredentialPublicKey";
 
 export class AttestationData {
@@ -9,7 +10,7 @@ export class AttestationData {
             throw new Error("Invalid input");
         }
 
-        attestationData.aaguid = buffer.slice(0,16);
+        attestationData.aaguid = buffer.slice(0, 16);
 
         index += 16;
         buffer.slice(0, index);
@@ -21,7 +22,7 @@ export class AttestationData {
         buffer = buffer.slice(credentialIdLength);
         const remainder: Buffer = buffer.slice(0, buffer.length);
 
-        attestationData.publicKey = await CredentialPublicKey.decode(remainder);
+        attestationData.publicKey = await PublicKeyDecodeUtility.decode(remainder);
 
         return attestationData;
     }

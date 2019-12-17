@@ -4,5 +4,5 @@ import { ServiceResponse } from "./ServiceResponse";
 
 export interface IFido2Service {
     options(user: User, request: any, existingTokens: Token[]): Promise<ServiceResponse>;
-    result(): ServiceResponse;
+    result(request: any, challenge: string): Promise<ServiceResponse>;
 }

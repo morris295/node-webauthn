@@ -1,5 +1,8 @@
 import base64url from "base64url";
 import * as crypto from "crypto";
+import { Base64Utility } from "../../Utilities/Base64Utility";
+import { AttestationObject } from "../Model/AttestationObject";
+import { CollectedClientData } from "../Model/CollectedClientData";
 import { Token } from "../Model/Token";
 import { User } from "../Model/User";
 import { IFido2Service } from "./IFido2Service";
@@ -26,7 +29,7 @@ export class AttestationService implements IFido2Service {
 
             if (request.authenticatorSelection !== undefined &&
                 request.authenticatorSelection !== null) {
-                    responseData.authenticatorSelection = request.authenticatorSelection;
+                responseData.authenticatorSelection = request.authenticatorSelection;
             }
 
             // This should be set up in a config somewhere.
@@ -89,7 +92,93 @@ export class AttestationService implements IFido2Service {
         });
     }
 
-    public result(): ServiceResponse {
-        throw new Error("Method not implemented.");
+    public result(request: any, challenge: string): Promise<ServiceResponse> {
+        return new Promise<ServiceResponse>(async (resolve, reject) => {
+            try {
+
+                if (request.id === null ||
+                    request.id === "" ||
+                    typeof (request.id) !== "string" ||
+                    request.id === undefined ||
+                    !Base64Utility.isBase64Encoded(request.id)) {
+                    throw new Error("Invalid request, no Id provided.");
+                }
+
+                if (request.type === "" ||
+                    request.type !== "public-key" ||
+                    typeof (request.type) !== "string") {
+                    throw new Error("Invalid request, type incorrect.");
+                }
+
+                if (request.response === null
+                    || request.response === undefined
+                    || typeof (request.response) !== "object") {
+                    throw new Error("Invalid object, no response.");
+                }
+
+                const response = request.response;
+
+                if (response.attestationObject === undefined ||
+                    response.attestationObject === null) {
+                    throw new Error("Invalid object, not an attestation");
+                }
+                if (response.clientDataJSON === undefined ||
+                    response.clientDataJSON === null) {
+                    throw new Error("Invalid object, no client data provided.");
+                }
+
+                const clientData = new CollectedClientData(response.clientDataJSON);
+
+                const attestationObject =
+                    await AttestationObject.decode(response.attestationObject);
+                const attestationStatement = attestationObject.$attestationStatement;
+                const authenticatorData = attestationObject.$authenticatorData;
+                const transports = response.transports;
+
+                if (clientData.$type !== "webauthn.create") {
+                    reject("Invalid type in client data.");
+                    return;
+                }
+
+                if (clientData.$challenge === undefined ||
+                    clientData.$challenge === null ||
+                    typeof (clientData.$challenge) !== "string" ||
+                    clientData.$challenge.length === 0) {
+                    throw new Error("Challenege invalid or not provided.");
+                    // reject("Challenge invalid or not provided.");
+                }
+
+                try {
+                    const verificationResponse =
+                        await attestationStatement.
+                            validateSignature(clientData, authenticatorData);
+
+                    if (verificationResponse.verified) {
+                        const publicKey =
+                            base64url.encode(
+                                authenticatorData.$attestationData.$publicKey.getAsBuffer());
+
+                        const token = new Token();
+                        token.$transports = transports;
+                        token.$credentialId = verificationResponse.authenticatorInfo.credentialId;
+                        token.$publicKey = verificationResponse.authenticatorInfo.publicKey;
+                        token.$counter = authenticatorData.$signCount;
+
+                        const result = new ServiceResponse();
+                        result.$data = token;
+                        result.$message = "Registration completed successfully.";
+                        result.$statusCode = 200;
+                        result.$hasError = false;
+
+                    } else {
+                        reject("Unable to validate attestation signature.");
+                    }
+                } catch (error) {
+                    reject(error);
+                }
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 }
