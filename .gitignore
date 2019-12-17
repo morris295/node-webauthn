@@ -60,5 +60,5 @@ typings/
 # next.js build output
 .next
 
-# VisualStudio Code config files
+dist/*
 .vscode/*
