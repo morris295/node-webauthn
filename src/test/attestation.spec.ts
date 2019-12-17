@@ -25,11 +25,7 @@ describe("Attestation options test function", () => {
         };
 
         attestationService.options(user, request, []).then((result: ServiceResponse) => {
-            console.log(result.$data);
             expect(result.$statusCode).to.equal(200);
-            // expect(result.$data).to.contain("timeout");
-            // expect(result.$data).to.contain("user");
-            // expect(result.$data).to.contain("challenge");
         });
     });
 });

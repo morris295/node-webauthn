@@ -143,9 +143,9 @@ export class AttestationService implements IFido2Service {
                 if (clientData.$challenge === undefined ||
                     clientData.$challenge === null ||
                     typeof (clientData.$challenge) !== "string" ||
-                    clientData.$challenge.length === 0) {
+                    clientData.$challenge.length === 0 ||
+                    clientData.$challenge !== challenge) {
                     throw new Error("Challenege invalid or not provided.");
-                    // reject("Challenge invalid or not provided.");
                 }
 
                 try {
