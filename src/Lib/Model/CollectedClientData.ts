@@ -1,4 +1,4 @@
-import { base64url } from "base64url";
+import base64url from "base64url";
 import * as crypto from "crypto";
 import { AuthenticationExtensions } from "./AuthenticationExtensions";
 import { TokenBinding } from "./TokenBinding";
@@ -14,7 +14,7 @@ export class CollectedClientData {
     private clientExtensions: AuthenticationExtensions;
     private authenticatorExtensions: AuthenticationExtensions;
 
-    constructor(encoded: Buffer) {
+    constructor(encoded: string) {
         const json: any = JSON.parse(base64url.decode(encoded));
         this.bytes = base64url.toBuffer(encoded);
 

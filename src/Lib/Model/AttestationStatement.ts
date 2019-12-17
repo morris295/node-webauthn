@@ -1,7 +1,7 @@
 import { FidoU2FAttestationStatement } from "./FidoU2FAttestationStatement";
 
 export abstract class AttestationStatement {
-    public static async decode(format, attestationStatement) {
+    public static async decode(format: string, attestationStatement: AttestationStatement) {
 
         let statement = null;
         switch (format) {

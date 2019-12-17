@@ -1,11 +1,11 @@
-import { base64url } from "base64url";
+import base64url from "base64url";
 import * as cbor from "cbor";
 import * as crypto from "crypto";
+import { CryptoUtility } from "../../Utilities/CryptoUtility";
 import { AttestationStatement } from "./AttestationStatement";
 import { AuthenticatorData } from "./AuthenticatorData";
 import { CollectedClientData } from "./CollectedClientData";
 import { ICborAttestation } from "./ICborAttestation";
-import { CryptoUtility } from "./Utilities/CryptoUtility";
 
 export class FidoU2FAttestationStatement
     extends AttestationStatement
@@ -13,7 +13,7 @@ export class FidoU2FAttestationStatement
 
     public caCert: Buffer[];
     public signature: Buffer;
-    public attestationCertificate: Buffer;
+    public attestationCertificate: Buffer[];
 
     constructor() {
         super();
@@ -32,7 +32,7 @@ export class FidoU2FAttestationStatement
 
         // subsequent items comprise the certificate chain.
         if (cborObject.x5c.length > 0) {
-            cborObject.x5c.foreach((cert) => {
+            cborObject.x5c.foreach((cert: Buffer) => {
                 this.caCert.push(cert);
             });
         }
@@ -88,7 +88,7 @@ export class FidoU2FAttestationStatement
         return response;
     }
 
-    private async verifySignature(signature, data, publicKey) {
+    private async verifySignature(signature: Buffer, data: Buffer, publicKey: string) {
         return crypto.createVerify("SHA256")
             .update(data)
             .verify(publicKey, signature);

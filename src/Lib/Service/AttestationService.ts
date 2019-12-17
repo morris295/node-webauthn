@@ -80,9 +80,12 @@ export class AttestationService implements IFido2Service {
                 responseData.challenge = base64url.encode(buffer);
 
                 response.$data = responseData;
-            });
+                response.$statusCode = 200;
+                response.$message = "Successfully retrieved attestation options.";
+                response.$hasError = false;
 
-            resolve(response);
+                resolve(response);
+            });
         });
     }
 

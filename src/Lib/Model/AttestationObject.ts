@@ -1,11 +1,11 @@
-import { base64url } from "base64url";
+import base64url from "base64url";
 import * as cbor from "cbor";
 import { AttestationStatement } from "./AttestationStatement";
 import { AuthenticatorData } from "./AuthenticatorData";
 
 export class AttestationObject {
 
-    public static async decode(urlString): Promise<AttestationObject> {
+    public static async decode(urlString: string): Promise<AttestationObject> {
         try {
             const attestationBuffer: Buffer = base64url.toBuffer(urlString);
             const decoded = await cbor.decodeAll(attestationBuffer);
