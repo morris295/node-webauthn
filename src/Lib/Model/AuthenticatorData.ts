@@ -2,7 +2,7 @@ import { AttestationData } from "./AttestationData";
 
 export class AuthenticatorData {
 
-    public static async decode(authData) {
+    public static async decode(authData: Buffer) {
         const authenticatorData = new AuthenticatorData();
         if (authData.length < 37) {
             throw new Error("Invalid input");
@@ -12,12 +12,12 @@ export class AuthenticatorData {
         authenticatorData.rpIdHash = authData.slice(0, 32);
         index += 32;
         authenticatorData.flags = authData[index++];
-        const signCountBytes = authData.slice(index, index+4);
+        const signCountBytes = authData.slice(index, index + 4);
         authenticatorData.signCount = signCountBytes.readUInt32BE(0);
         index += 4;
         const definedIndex = index;
-        const hasAttestationData = (authenticatorData.flags & 1 << 6) != 0;
-        const hasExtensionData = (authenticatorData.flags & 1 << 7) != 0;
+        const hasAttestationData = (authenticatorData.flags & 1 << 6) !== 0;
+        const hasExtensionData = (authenticatorData.flags & 1 << 7) !== 0;
 
         if (hasAttestationData) {
             const remainder = authData.slice(index, authData.length);

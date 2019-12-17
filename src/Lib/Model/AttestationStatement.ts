@@ -30,5 +30,5 @@ export abstract class AttestationStatement {
         return statement;
     }
 
-    public abstract encode();
+    public abstract encode(): Buffer;
 }
