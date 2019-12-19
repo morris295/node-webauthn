@@ -37,7 +37,7 @@ describe("Attestation result test function", () => {
 
         const attestationService = new AttestationService();
 
-        attestationService.result(request, challenge).then((result) => {
+        attestationService.result(request, challenge).then((result: ServiceResponse) => {
             expect(result.$statusCode).to.equal(200);
         });
     });
