@@ -1,6 +1,7 @@
 import base64url from "base64url";
 import * as cbor from "cbor";
 import * as crypto from "crypto";
+import nodeuuid from "node-uuid";
 import { CryptoUtility } from "../../Utilities/CryptoUtility";
 import { AuthenticatorData } from "./AuthenticatorData";
 import { CollectedClientData } from "./CollectedClientData";
@@ -75,6 +76,7 @@ export class FidoU2FAttestationStatement
         if (result) {
             response.verified = true;
             response.authenticatorInfo = {
+                aaguid: nodeuuid.unparse(authenticatorData.$attestationData.$aaguid),
                 counter: authenticatorData.$signCount,
                 credentialId: base64url.encode(authenticatorData.$attestationData.$credentialId),
                 fmt: "fido-u2f",

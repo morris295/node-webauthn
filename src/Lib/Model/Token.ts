@@ -4,6 +4,7 @@ export class Token {
     private transports: string[];
     private credentialId: string;
     private counter: number;
+    private aaguid: string;
 
     /**
      * Getter $publicKey
@@ -69,4 +70,19 @@ export class Token {
         this.counter = value;
     }
 
+    /**
+     * Getter $aaguid
+     * @return {string}
+     */
+    public get $aaguid(): string {
+        return this.aaguid;
+    }
+
+    /**
+     * Setter $aaguid
+     * @param {string} value
+     */
+    public set $aaguid(value: string) {
+        this.aaguid = value;
+    }
 }

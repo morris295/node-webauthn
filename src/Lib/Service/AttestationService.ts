@@ -148,33 +148,29 @@ export class AttestationService implements IFido2Service {
                     throw new Error("Challenege invalid or not provided.");
                 }
 
-                try {
-                    const verificationResponse =
-                        await attestationStatement.
-                            validateSignature(clientData, authenticatorData);
+                const verificationResponse = await attestationStatement
+                    .validateSignature(clientData, authenticatorData);
 
-                    if (verificationResponse.verified) {
-                        const publicKey =
-                            base64url.encode(
-                                authenticatorData.$attestationData.$publicKey.getAsBuffer());
+                if (verificationResponse.verified) {
+                    const publicKey =
+                        base64url.encode(
+                            authenticatorData.$attestationData.$publicKey.getAsBuffer());
 
-                        const token = new Token();
-                        token.$transports = transports;
-                        token.$credentialId = verificationResponse.authenticatorInfo.credentialId;
-                        token.$publicKey = verificationResponse.authenticatorInfo.publicKey;
-                        token.$counter = authenticatorData.$signCount;
+                    const token = new Token();
+                    token.$transports = transports;
+                    token.$credentialId = verificationResponse.authenticatorInfo.credentialId;
+                    token.$publicKey = verificationResponse.authenticatorInfo.publicKey;
+                    token.$counter = authenticatorData.$signCount;
+                    token.$aaguid = verificationResponse.authenticatorInfo.aaguid;
 
-                        const result = new ServiceResponse();
-                        result.$data = token;
-                        result.$message = "Registration completed successfully.";
-                        result.$statusCode = 200;
-                        result.$hasError = false;
+                    const result = new ServiceResponse();
+                    result.$data = token;
+                    result.$message = "Registration completed successfully.";
+                    result.$statusCode = 200;
+                    result.$hasError = false;
 
-                    } else {
-                        reject("Unable to validate attestation signature.");
-                    }
-                } catch (error) {
-                    reject(error);
+                } else {
+                    reject("Unable to validate attestation signature.");
                 }
             } catch (error) {
                 reject(error);

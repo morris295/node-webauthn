@@ -16,8 +16,12 @@
     "@types/base64url": "^2.0.0",
     "@types/cbor": "^5.0.0",
     "@types/chai": "^4.2.7",
+    "@types/elliptic": "^6.4.10",
+    "@types/jsrsasign": "^8.0.2",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.17",
+    "@types/node-rsa": "^1.0.0",
+    "@types/node-uuid": "0.0.28",
     "chai": "^4.2.0",
     "mocha": "^6.2.2",
     "ts-node": "^8.5.4",
@@ -27,6 +31,11 @@
   "dependencies": {
     "base64url": "^3.0.1",
     "cbor": "^5.0.1",
-    "eccrypto": "^1.1.2"
+    "eccrypto": "^1.1.2",
+    "elliptic": "^6.5.2",
+    "jsrsasign": "^8.0.12",
+    "node-rsa": "^1.0.7",
+    "node-uuid": "^1.4.8",
+    "uuid-buffer": "^1.0.3"
   }
 }

@@ -37,6 +37,24 @@ export class PublicKeyDecodeUtility {
         } else {
             const rsaKey: RsaKey = new RsaKey();
 
+            for (const item of map.entries()) {
+                const key: number = item[0];
+                switch (key) {
+                    case this.nLabel:
+                        rsaKey.$n = item[1];
+                        break;
+                    case this.eLabel:
+                        rsaKey.$e = item[1];
+                        break;
+                    case this.ktyLabel:
+                        rsaKey.$kty = item[1];
+                        break;
+                    case this.algLabel:
+                        rsaKey.$algorithm = item[1];
+                        break;
+                }
+            }
+
             publicKey = rsaKey;
         }
 

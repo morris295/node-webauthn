@@ -3,6 +3,7 @@ import * as cbor from "cbor";
 import { AuthenticatorData } from "./AuthenticatorData";
 import { FidoU2FAttestationStatement } from "./FidoU2FAttestationStatement";
 import { IAttestationStatement } from "./IAttestationStatement";
+import { PackedAttestationStatement } from "./PackedAttestationStatement";
 
 export class AttestationObject {
 
@@ -15,6 +16,7 @@ export class AttestationObject {
             result.format = decoded[0].fmt;
             result.authenticatorData = await
                 AuthenticatorData.decode(decoded[0].authData);
+            result.authenticatorData.$bytes = decoded[0].authData;
             result.attestationStatement = await
                 this.decodeAttestationStatement(result.format, decoded[0].attStmt);
 
@@ -37,10 +39,10 @@ export class AttestationObject {
             //     statement = new AndroidSafetynetAttestationStatement();
             //     await statement.decode(attestationStatement);
             //     break;
-            // case "packed":
-            //     statement = new PackedAttestationStatement();
-            //     await statement.decode(attestationStatement);
-            //     break;
+            case "packed":
+                statement = new PackedAttestationStatement();
+                await statement.decode(attestationStatement);
+                break;
             // case "tpm":
             //     statement = new TpmAttestationStatement();
             //     await statement.decode(attestationStatement);
