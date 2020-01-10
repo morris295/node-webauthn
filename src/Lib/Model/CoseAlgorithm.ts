@@ -24,8 +24,6 @@ export class CoseAlgorithm {
                 return "sha256";
             case -36:
                 return "sha384";
-            case -37:
-                return "sha512";
         }
     }
 
