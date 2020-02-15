@@ -4,6 +4,7 @@ import { ServiceResponse } from "Service/ServiceResponse";
 import { Token } from "../Lib/Model/Token";
 import { User } from "../Lib/Model/User";
 import { AssertionService } from "../Lib/Service/AssertionService";
+import { fail } from "assert";
 
 describe("Assertion options test function", () => {
     it("Should generate assertion options", () => {
@@ -31,13 +32,22 @@ describe("Assertion options test function", () => {
 
 describe("Assertion result test function", () => {
     it("Should successfully validate the provided assertion", () => {
-        const request = JSON.parse("{ \"id\":\"LFdoCFJTyB82ZzSJUHc-c72yraRc_1mPvGX8ToE8su39xX26Jcqd31LUkKOS36FIAWgWl6itMKqmDvruha6ywA\", \"rawId\":\"LFdoCFJTyB82ZzSJUHc-c72yraRc_1mPvGX8ToE8su39xX26Jcqd31LUkKOS36FIAWgWl6itMKqmDvruha6ywA\", \"response\":{ \"authenticatorData\":\"SZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2MBAAAAAA\", \"signature\":\"MEYCIQCv7EqsBRtf2E4o_BjzZfBwNpP8fLjd5y6TUOLWt5l9DQIhANiYig9newAJZYTzG1i5lwP-YQk9uXFnnDaHnr2yCKXL\", \"userHandle\":\"\", \"clientDataJSON\":\"eyJjaGFsbGVuZ2UiOiJ4ZGowQ0JmWDY5MnFzQVRweTBrTmM4NTMzSmR2ZExVcHFZUDh3RFRYX1pFIiwiY2xpZW50RXh0ZW5zaW9ucyI6e30sImhhc2hBbGdvcml0aG0iOiJTSEEtMjU2Iiwib3JpZ2luIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwidHlwZSI6IndlYmF1dGhuLmdldCJ9\" }, \"type\":\"public-key\"}");
+        const request = JSON.parse("{\"id\": \"kGjySJ3u3RXIoIQIFq3ZfEbj8-a1Xd_-CLS7AAoBbYNe89Z2iUNRi7KMPMKAm83z80knsSvWiHCK2w8T4b_v50CPilwBwVOL6fVOoE_0tYPLM842mGOTqNfII44TK42b\", \"rawId\": \"kGjySJ3u3RXIoIQIFq3ZfEbj8-a1Xd_-CLS7AAoBbYNe89Z2iUNRi7KMPMKAm83z80knsSvWiHCK2w8T4b_v50CPilwBwVOL6fVOoE_0tYPLM842mGOTqNfII44TK42b\", \"response\": { \"authenticatorData\": \"Rsx_uWedVbLbkJLhyNnl4dArdYDwtIEsdwli4eSPWtgBAAAABw\", \"signature\": \"MEYCIQDzky0obUVAHFE27veVz6jRDBsSuxVF_NMRP2R-dkJgngIhANve7UngHIklBlYcwcYQ41yERxIwisW3C3Yb5gijNFV_\", \"clientDataJSON\": \"eyJjaGFsbGVuZ2UiOiJQakctMXVyR2lYeWNvdldxMFF3amtLcUJpUVQtMGFQVER0UTNmbmJTcFZJIiwib3JpZ2luIjoiaHR0cHM6Ly93ZWJhdXRobmRlbW8uYXBwc3BvdC5jb20iLCJ0eXBlIjoid2ViYXV0aG4uZ2V0In0\" }, \"type\": \"public-key\" }");
         const assertionService = new AssertionService();
         const token = new Token();
-        token.$aaguid = "";
+        const challenge = "PjG-1urGiXycovWq0QwjkKqBiQT-0aPTDtQ3fnbSpVI";
+        token.$aaguid = "00000000-0000-0000-0000-000000000000"; // U2F authenticator
+        token.$publicKey = "BNPY07wKCZGpezZRfmVpeEDBZMQJJj801bl" +
+            "_A4ffwNH2DJ-Z4wh68qPNYu5HHHJYpRX01ZXQKsTy1bjse4Ae68I";
+        token.$counter = 1;
+        const metadata = {}; // Blank metadata is acceptable for a U2F authenticator.
 
-        assertionService.result(request, "", new Token(), {}, "preferred").then((result) => {
-            expect(result.$statusCode).to.equal(200);
-        });
+        assertionService.result(request, challenge, token, {}, "preferred")
+            .then((result) => {
+                expect(result.$statusCode).to.equal(200);
+            })
+            .catch((error) => {
+                fail(error);
+            });
     });
 });

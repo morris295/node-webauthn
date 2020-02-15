@@ -16,8 +16,8 @@ export class AuthenticatorData {
         authenticatorData.signCount = signCountBytes.readUInt32BE(0);
         index += 4;
         const definedIndex = index;
-        const hasAttestationData = (authenticatorData.flags & 1 << 6) !== 0;
-        const hasExtensionData = (authenticatorData.flags & 1 << 7) !== 0;
+        const hasAttestationData = ((authenticatorData.flags & 1 << 6) !== 0);
+        const hasExtensionData = ((authenticatorData.flags & 1 << 7) !== 0);
 
         if (hasAttestationData) {
             const remainder = authData.slice(index, authData.length);

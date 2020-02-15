@@ -3,6 +3,7 @@ import "mocha";
 import { ServiceResponse } from "Service/ServiceResponse";
 import { User } from "../Lib/Model/User";
 import { AttestationService } from "../Lib/Service/AttestationService";
+import { fail } from "assert";
 
 const attestationService = new AttestationService();
 
@@ -33,8 +34,9 @@ describe("Attestation options test function", () => {
 
 describe("Attestation result test function", () => {
     it("Should validate attestation result successfully.", () => {
-        const challenge = "z0q0b7VXI64BiX4jEfbTVkx-8CpAXKOkryUaBHA7C8M";
-        const request = JSON.parse("{\"id\":\"ZZFq4dRymM6a2Ob4zg-4bpBPFmkoEPKmgKtPO9RMfIngihHUBtbxaR_Y3N0Opp5vuWjxbX4uPixAmdSoEoon_IZoY6mhLDkvDIKpBpriufLW7q906nkm1oM44JJUqdhX\",\"rawId\":\"ZZFq4dRymM6a2Ob4zg-4bpBPFmkoEPKmgKtPO9RMfIngihHUBtbxaR_Y3N0Opp5vuWjxbX4uPixAmdSoEoon_IZoY6mhLDkvDIKpBpriufLW7q906nkm1oM44JJUqdhX\",\"type\":\"public-key\",\"response\":{\"clientDataJSON\":\"eyJjaGFsbGVuZ2UiOiJ6MHEwYjdWWEk2NEJpWDRqRWZiVFZreC04Q3BBWEtPa3J5VWFCSEE3QzhNIiwib3JpZ2luIjoiaHR0cDovL2xvY2FsaG9zdCIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ\",\"attestationObject\":\"o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEYwRAIgZaYm9BKJ3P6WevaR86YSpXw_w55OjLw5fxyWQ3x-PHMCIBtpG42kBDKdDjXW-GAKt-_hna7pDKQJy7zYRF4xuzWYY3g1Y4FZAaMwggGfMIIBRaADAgECAgIQEzAKBggqhkjOPQQDAjA6MQswCQYDVQQGEwJDQTESMBAGA1UECgwJSFlQRVJTRUNVMRcwFQYDVQQDDA5IWVBFUkZJRE8gMDIwMDAgFw0xODAxMDEwMDAwMDBaGA8yMDMyMTIzMTIzNTk1OVowPTELMAkGA1UEBhMCQ0ExEjAQBgNVBAoMCUhZUEVSU0VDVTEaMBgGA1UEAwwRSFlQRVJGSURPIDAyMDAgMDgwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATRAoPu3tAg68LmVh2NWZzQNz995-99t4dw4yUX288E6owiPE7cdGydj_bjvz8cjxAKWBNbvHQ_zG9SF9XGTmqHozYwNDAdBgNVHQ4EFgQULrn_NXL2dijRKRo7V5JPgYqtnnIwEwYLKwYBBAGC5RwCAQEEBAMCBSAwCgYIKoZIzj0EAwIDSAAwRQIhAI4W-qPi-48RMthJAgeMD7m1donuW41IYaLBWRhMG-bgAiBdhbw6p18a_lr4baGTHgVSVqbyY5Z8uJiY366pvnz0YWhhdXRoRGF0YVjkSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NBAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGWRauHUcpjOmtjm-M4PuG6QTxZpKBDypoCrTzvUTHyJ4IoR1AbW8Wkf2NzdDqaeb7lo8W1-Lj4sQJnUqBKKJ_yGaGOpoSw5LwyCqQaa4rny1u6vdOp5JtaDOOCSVKnYV6UBAgMmIAEhWCC4aDFP6FlTy1Fbd__ehNrBiSi6oGjEYhcsPRbuwYWPSyJYIBc-UZG64gSnwrFUYBfMESGyYnJYz5sl8nBvGPX-fCMd\",\"transports\":[\"usb\"]}}");
+        const challenge = "5Greps4umHCLr9l1CP4Nn-tiB2cYkOh1xrIfWuHqKYo";
+        const request = JSON.parse("{\"id\":\"Owu9RgHj3HZkBmUuvScDma6R_yJqNssCkVaR-jkpgtyDPtoyXbxa4ASZ5N0kWB2pTn4_M2Ta7FUWsBEGelWACcjNjLyJrggSnudmeUElvegfatwJnJes849hZ-k1QVUW\",\"rawId\":\"Owu9RgHj3HZkBmUuvScDma6R_yJqNssCkVaR-jkpgtyDPtoyXbxa4ASZ5N0kWB2pTn4_M2Ta7FUWsBEGelWACcjNjLyJrggSnudmeUElvegfatwJnJes849hZ-k1QVUW\",\"type\":\"public-key\",\"response\":{\"clientDataJSON\":\"eyJjaGFsbGVuZ2UiOiI1R3JlcHM0dW1IQ0xyOWwxQ1A0Tm4tdGlCMmNZa09oMXhySWZXdUhxS1lvIiwib3JpZ2luIjoiaHR0cDovL2xvY2FsaG9zdCIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ\",\"attestationObject\":\"o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEcwRQIgKwHTn8rCJLIl3xSYmOvKRS9PN6lgHEz1DsTBfB3eRzsCIQCJvFgxMPdE3_2xVtkcjNOt0Flq2hXPUTr8d2I14_UZ4WN4NWOBWQGjMIIBnzCCAUWgAwIBAgICEBMwCgYIKoZIzj0EAwIwOjELMAkGA1UEBhMCQ0ExEjAQBgNVBAoMCUhZUEVSU0VDVTEXMBUGA1UEAwwOSFlQRVJGSURPIDAyMDAwIBcNMTgwMTAxMDAwMDAwWhgPMjAzMjEyMzEyMzU5NTlaMD0xCzAJBgNVBAYTAkNBMRIwEAYDVQQKDAlIWVBFUlNFQ1UxGjAYBgNVBAMMEUhZUEVSRklETyAwMjAwIDA4MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE0QKD7t7QIOvC5lYdjVmc0Dc_fefvfbeHcOMlF9vPBOqMIjxO3HRsnY_2478_HI8QClgTW7x0P8xvUhfVxk5qh6M2MDQwHQYDVR0OBBYEFC65_zVy9nYo0SkaO1eST4GKrZ5yMBMGCysGAQQBguUcAgEBBAQDAgUgMAoGCCqGSM49BAMCA0gAMEUCIQCOFvqj4vuPETLYSQIHjA-5tXaJ7luNSGGiwVkYTBvm4AIgXYW8OqdfGv5a-G2hkx4FUlam8mOWfLiYmN-uqb589GFoYXV0aERhdGFY5EmWDeWIDoxodDQXD2R2YFuP5K65ooYyx5lc87qDHZdjQQAAAAAAAAAAAAAAAAAAAAAAAAAAAGA7C71GAePcdmQGZS69JwOZrpH_Imo2ywKRVpH6OSmC3IM-2jJdvFrgBJnk3SRYHalOfj8zZNrsVRawEQZ6VYAJyM2MvImuCBKe52Z5QSW96B9q3Amcl6zzj2Fn6TVBVRalAQIDJiABIVgg09jTvAoJkal7NlF-ZWl4QMFkxAkmPzTVuX8Dh9_A0fYiWCAMn5njCHryo81i7kccclilFfTVldAqxPLVuOx7gB7rwg\",\"transports\":[\"usb\"]}}"
+        );
 
         attestationService.result(request, challenge).then((result: ServiceResponse) => {
             expect(result.$statusCode).to.equal(200);
@@ -55,12 +57,16 @@ describe("Full Packed attestation result test function", () => {
 
 describe("Surrogate Packed attestation result test function", () => {
     it("Should validate attestation result " +
-    "for surrogate packed attestation successfully", () => {
-        const challenge = "AXkXWXPP3gLx8OLlpkJ3aRRhFWntnSENggnjDpBql1ngKol7xWwevUYvrpBDP3LEvdr2EOStOFpGGxnMvXk-Vw";
-        const request = JSON.parse("{ \"id\":  \"H6X2BnnjgOzu_Oj87vpRnwMJeJYVzwM3wtY1lhAfQ14\", \"rawId\":  \"H6X2BnnjgOzu_Oj87vpRnwMJeJYVzwM3wtY1lhAfQ14\", \"response\": { \"attestationObject\":  \"o2NmbXRmcGFja2VkZ2F0dFN0bXSiY2FsZzn__mNzaWdZAQCPypMLXWqtCZ1sc5QdjhH-pAzm8-adpfbemd5zsym2krscwV0EeOdTrdUOdy3hWj5HuK9dIX_OpNro2jKrHfUj_0Kp-u87iqJ3MPzs-D9zXOqkbWqcY94Zh52wrPwhGfJ8BiQp5T4Q97E042hYQRDKmtv7N-BT6dywiuFHxfm1sDbUZ_yyEIN3jgttJzjp_wvk_RJmb78bLPTlym83Y0Ws73K6FFeiqFNqLA_8a4V0I088hs_IEPlj8PWxW0wnIUhI9IcRf0GEmUwTBpbNDGpIFGOudnl_C3YuXuzK3R6pv2r7m9-9cIIeeYXD9BhSMBQ0A8oxBbVF7j-0xXDNrXHZaGF1dGhEYXRhWQFnSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NBAAAAOKjVmSRjt0nqud40p1PeHgEAIB-l9gZ544Ds7vzo_O76UZ8DCXiWFc8DN8LWNZYQH0NepAEDAzn__iBZAQDAIqzybPPmgeL5OR6JKq9bWDiENJlN_LePQEnf1_sgOm4FJ9kBTbOTtWplfoMXg40A7meMppiRqP72A3tmILwZ5xKIyY7V8Y2t8X1ilYJol2nCKOpAEqGLTRJjF64GQxen0uFpi1tA6l6N-ZboPxjky4aidBdUP22YZuEPCO8-9ZTha8qwvTgZwMHhZ40TUPEJGGWOnHNlYmqnfFfk0P-UOZokI0rqtqqQGMwzV2RrH2kjKTZGfyskAQnrqf9PoJkye4KUjWkWnZzhkZbrDoLyTEX2oWvTTflnR5tAVMQch4UGgEHSZ00G5SFoc19nGx_UJcqezx5cLZsny-qQYDRjIUMBAAE\", \"clientDataJSON\":  \"eyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJjaGFsbGVuZ2UiOiJBWGtYV1hQUDNnTHg4T0xscGtKM2FSUmhGV250blNFTmdnbmpEcEJxbDFuZ0tvbDd4V3dldlVZdnJwQkRQM0xFdmRyMkVPU3RPRnBHR3huTXZYay1WdyIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ\" }, \"type\":  \"public-key\" }");
+        "for surrogate packed attestation successfully", () => {
+            const challenge = "AXkXWXPP3gLx8OLlpkJ3aRRhFWntnSENggnjDpBql1ngKol7xWwevUYvrpBDP3LEvdr2EOStOFpGGxnMvXk-Vw";
+            const request = JSON.parse("{ \"id\":  \"H6X2BnnjgOzu_Oj87vpRnwMJeJYVzwM3wtY1lhAfQ14\", \"rawId\":  \"H6X2BnnjgOzu_Oj87vpRnwMJeJYVzwM3wtY1lhAfQ14\", \"response\": { \"attestationObject\":  \"o2NmbXRmcGFja2VkZ2F0dFN0bXSiY2FsZzn__mNzaWdZAQCPypMLXWqtCZ1sc5QdjhH-pAzm8-adpfbemd5zsym2krscwV0EeOdTrdUOdy3hWj5HuK9dIX_OpNro2jKrHfUj_0Kp-u87iqJ3MPzs-D9zXOqkbWqcY94Zh52wrPwhGfJ8BiQp5T4Q97E042hYQRDKmtv7N-BT6dywiuFHxfm1sDbUZ_yyEIN3jgttJzjp_wvk_RJmb78bLPTlym83Y0Ws73K6FFeiqFNqLA_8a4V0I088hs_IEPlj8PWxW0wnIUhI9IcRf0GEmUwTBpbNDGpIFGOudnl_C3YuXuzK3R6pv2r7m9-9cIIeeYXD9BhSMBQ0A8oxBbVF7j-0xXDNrXHZaGF1dGhEYXRhWQFnSZYN5YgOjGh0NBcPZHZgW4_krrmihjLHmVzzuoMdl2NBAAAAOKjVmSRjt0nqud40p1PeHgEAIB-l9gZ544Ds7vzo_O76UZ8DCXiWFc8DN8LWNZYQH0NepAEDAzn__iBZAQDAIqzybPPmgeL5OR6JKq9bWDiENJlN_LePQEnf1_sgOm4FJ9kBTbOTtWplfoMXg40A7meMppiRqP72A3tmILwZ5xKIyY7V8Y2t8X1ilYJol2nCKOpAEqGLTRJjF64GQxen0uFpi1tA6l6N-ZboPxjky4aidBdUP22YZuEPCO8-9ZTha8qwvTgZwMHhZ40TUPEJGGWOnHNlYmqnfFfk0P-UOZokI0rqtqqQGMwzV2RrH2kjKTZGfyskAQnrqf9PoJkye4KUjWkWnZzhkZbrDoLyTEX2oWvTTflnR5tAVMQch4UGgEHSZ00G5SFoc19nGx_UJcqezx5cLZsny-qQYDRjIUMBAAE\", \"clientDataJSON\":  \"eyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJjaGFsbGVuZ2UiOiJBWGtYV1hQUDNnTHg4T0xscGtKM2FSUmhGV250blNFTmdnbmpEcEJxbDFuZ0tvbDd4V3dldlVZdnJwQkRQM0xFdmRyMkVPU3RPRnBHR3huTXZYay1WdyIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ\" }, \"type\":  \"public-key\" }");
 
-        attestationService.result(request, challenge).then((result) => {
-            expect(result.$statusCode).to.equal(200);
+            attestationService.result(request, challenge)
+                .then((result) => {
+                    expect(result.$statusCode).to.equal(200);
+                })
+                .catch((error) => {
+                    fail(error);
+                });
         });
-    });
 });

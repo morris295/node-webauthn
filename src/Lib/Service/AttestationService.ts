@@ -100,7 +100,7 @@ export class AttestationService implements IFido2Service {
                     request.id === "" ||
                     typeof (request.id) !== "string" ||
                     request.id === undefined ||
-                    !Base64Utility.isBase64Encoded(request.id)) {
+                    !Base64Utility.isBase64UrlEncoded(request.id)) {
                     throw new Error("Invalid request, no Id provided.");
                 }
 

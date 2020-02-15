@@ -1,11 +1,11 @@
 import base64url from "base64url";
 
 export class Base64Utility {
-    public static isBase64Encoded(value: string) {
+    public static isBase64UrlEncoded(value: string) {
         let result = (value !== "" && value !== null);
 
         if (value.indexOf("+") >= 0) {
-           result = false;
+            result = false;
         }
 
         if (value.indexOf("/") >= 0) {
@@ -16,7 +16,7 @@ export class Base64Utility {
             result = false;
         }
 
-        if (typeof(value) !== "string") {
+        if (typeof (value) !== "string") {
             result = false;
         }
 
