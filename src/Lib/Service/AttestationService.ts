@@ -1,13 +1,12 @@
+import base64url from "base64url";
 import * as crypto from "crypto";
-
-import { AttestationObject } from "../Model/AttestationObject";
 import { Base64Utility } from "../../Utilities/Base64Utility";
+import { AttestationObject } from "../Model/AttestationObject";
 import { CollectedClientData } from "../Model/CollectedClientData";
-import { IFido2Service } from "./IFido2Service";
-import { ServiceResponse } from "./ServiceResponse";
 import { Token } from "../Model/Token";
 import { User } from "../Model/User";
-import base64url from "base64url";
+import { IFido2Service } from "./IFido2Service";
+import { ServiceResponse } from "./ServiceResponse";
 
 export class AttestationService implements IFido2Service {
     /**
@@ -18,7 +17,7 @@ export class AttestationService implements IFido2Service {
     public options(
         user: User,
         request: any,
-        existingTokens: Token[]
+        existingTokens: Token[],
     ): Promise<ServiceResponse> {
         return new Promise<ServiceResponse>((resolve, reject) => {
             const response = new ServiceResponse();
@@ -150,11 +149,11 @@ export class AttestationService implements IFido2Service {
                 }
 
                 const clientData = new CollectedClientData(
-                    response.clientDataJSON
+                    response.clientDataJSON,
                 );
 
                 const attestationObject = await AttestationObject.decode(
-                    response.attestationObject
+                    response.attestationObject,
                 );
                 const attestationStatement =
                     attestationObject.$attestationStatement;
@@ -178,12 +177,12 @@ export class AttestationService implements IFido2Service {
 
                 const verificationResponse = await attestationStatement.validateSignature(
                     clientData,
-                    authenticatorData
+                    authenticatorData,
                 );
 
                 if (verificationResponse.verified) {
                     const publicKey = base64url.encode(
-                        authenticatorData.$attestationData.$publicKey.getAsBuffer()
+                        authenticatorData.$attestationData.$publicKey.getAsBuffer(),
                     );
 
                     const token = new Token();

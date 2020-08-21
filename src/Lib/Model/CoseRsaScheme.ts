@@ -1,5 +1,5 @@
 export class CoseRsaScheme {
-    public static GetByIdentifier(code: number) {
+    public static getByIdentifier(code: number) {
         switch (code) {
             case -3:
                 return "pss-sha256";

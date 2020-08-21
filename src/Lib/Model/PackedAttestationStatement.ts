@@ -71,7 +71,7 @@ export class PackedAttestationStatement implements IAttestationStatement {
 
             if (certificateInfo.subject.OU !== "Authenticator Attestation") {
                 throw new Error(
-                    'Batch certificate OU MUST be set strictly to "Authenticator Attestation"!',
+                    "Batch certificate OU MUST be set strictly to \"Authenticator Attestation\"!",
                 );
             }
 
@@ -169,14 +169,12 @@ export class PackedAttestationStatement implements IAttestationStatement {
                 }
             } else if (publicKeyCose instanceof RsaKey) {
                 const rsaKey = publicKeyCose as RsaKey;
-                const signingScheme = CoseRsaScheme.GetByIdentifier(
+                const signingScheme = CoseRsaScheme.getByIdentifier(
                     rsaKey.$algorithm,
                 );
 
                 const key = new NodeRSA(undefined);
-                key.setOptions({
-                    signingScheme: signingScheme,
-                });
+                key.setOptions({ signingScheme });
                 key.importKey(
                     {
                         e: 65537,
