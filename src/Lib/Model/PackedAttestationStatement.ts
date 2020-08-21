@@ -147,7 +147,10 @@ export class PackedAttestationStatement implements IAttestationStatement {
                 const rsaKey = publicKeyCose as RsaKey;
                 const signingScheme = CoseRsaScheme.GetByIdentifier(rsaKey.$algorithm);
 
-                const key = new NodeRSA(undefined, "pkcs1");
+                const key = new NodeRSA(undefined);
+                key.setOptions({                  
+                    signingScheme: signingScheme
+                })
                 key.importKey({
                     e: 65537,
                     n: rsaKey.$n,

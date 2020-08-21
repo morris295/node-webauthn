@@ -22,7 +22,7 @@ export class FidoU2FAttestationStatement
      *
      * @param {CBOR Object} cborObject
      */
-    public async decode(cborObject: any): Promise<FidoU2FAttestationStatement> {
+    public async decode(cborObject: any): Promise<IAttestationStatement> {
         this.signature = cborObject.sig;
 
         // first item in the x5c list is the attestation cert.
@@ -38,7 +38,7 @@ export class FidoU2FAttestationStatement
         return this;
     }
 
-    public encode() {
+    public encode(): Buffer | ArrayBufferView {
         return cbor.encode([this.signature, this.caCert, this.attestationCertificate]);
     }
 

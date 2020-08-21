@@ -38,6 +38,7 @@ export class RsaKey extends CredentialPublicKey {
     }
 
     public getAsBuffer(): Buffer {
-        throw new Error("Method not implemented.");
+        // Check this against reference implementation, needs to return a valid byte string form of RSA key.
+        return Buffer.concat([this.e, this.n]);
     }
 }
