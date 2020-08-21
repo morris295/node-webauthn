@@ -1,5 +1,4 @@
 export class User {
-
     private username: string;
     private displayName: string;
     private id: string;

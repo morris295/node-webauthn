@@ -1,5 +1,4 @@
 export class CoseCurve {
-
     public static getByIdentifier(id: string) {
         switch (id) {
             case "1":

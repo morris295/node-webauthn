@@ -1,5 +1,4 @@
 export class Token {
-
     private publicKey: string;
     private transports: string[];
     private credentialId: string;

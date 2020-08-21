@@ -34,5 +34,4 @@ export class TokenBinding {
     public set $id(value: string) {
         this.id = value;
     }
-
 }

@@ -1,5 +1,3 @@
-"use strict";
-
 export abstract class CredentialPublicKey {
     protected cborEncodedKey: Buffer;
     protected algorithm: number;

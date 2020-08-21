@@ -1,7 +1,6 @@
 import { CredentialPublicKey } from "./CredentialPublicKey";
 
 export class RsaKey extends CredentialPublicKey {
-
     private n: Buffer;
     private e: Buffer;
 

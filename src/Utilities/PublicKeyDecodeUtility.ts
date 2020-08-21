@@ -1,4 +1,5 @@
 import * as cbor from "cbor";
+
 import { CredentialPublicKey } from "Model/CredentialPublicKey";
 import { EccKey } from "../Lib/Model/EccKey";
 import { RsaKey } from "../Lib/Model/RsaKey";

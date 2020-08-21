@@ -1,5 +1,4 @@
 export class CoseRsaScheme {
-
     public static GetByIdentifier(code: number) {
         switch (code) {
             case -3:

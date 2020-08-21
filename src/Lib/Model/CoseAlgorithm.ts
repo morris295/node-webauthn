@@ -1,5 +1,4 @@
 export class CoseAlgorithm {
-
     public static getByIdentifier(id: number) {
         switch (id) {
             case -257:
@@ -26,5 +25,4 @@ export class CoseAlgorithm {
                 return "sha384";
         }
     }
-
 }
