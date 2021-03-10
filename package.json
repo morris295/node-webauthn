@@ -32,7 +32,7 @@
     "base64url": "^3.0.1",
     "cbor": "^5.1.0",
     "eccrypto": "^1.1.5",
-    "elliptic": "^6.5.3",
+    "elliptic": "^6.5.4",
     "jsrsasign": "^8.0.24",
     "node-rsa": "^1.1.1",
     "node-uuid": "^1.4.8",
