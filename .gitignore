@@ -62,3 +62,4 @@ typings/
 
 # Vscode configs
 .vscode/*
+dist/*

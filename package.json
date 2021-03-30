@@ -1,8 +1,9 @@
 {
-  "name": "node-webauthn",
-  "version": "1.0.0",
+  "name": "node-webauthn-library",
+  "version": "0.1.0",
   "description": "A webauthn library written in Node.js",
   "main": "index.js",
+  "types": "src/node-webauthn-lib.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
@@ -25,6 +26,9 @@
     "chai": "^4.2.0",
     "mocha": "^6.2.3",
     "ts-node": "^8.10.2",
+    "mocha": "^6.2.2",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
     "typescript": "^3.9.7"
   },

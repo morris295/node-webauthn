@@ -1,30 +1,30 @@
 import "mocha";
 
-import { AttestationService } from "../Lib/Service/AttestationService";
-import { ServiceResponse } from "Service/ServiceResponse";
-import { User } from "../Lib/Model/User";
-import { expect } from "chai";
 import { fail } from "assert";
+import { expect } from "chai";
+import { AttestationConveyance } from "../Lib/Model/AttestationConveyance";
+import { AttestationOptionsRequest } from "../Lib/Model/AttestationOptionsRequest";
+import { AuthenticatorAttachment } from "../Lib/Model/AuthenticatorAttachment";
+import { AuthenticatorSelection } from "../Lib/Model/AuthenticatorSelection";
+import { User } from "../Lib/Model/User";
+import { UserVerification } from "../Lib/Model/UserVerification";
+import { AttestationService } from "../Lib/Service/AttestationService";
+import { ServiceResponse } from "../Lib/Service/ServiceResponse";
 
 const attestationService = new AttestationService();
 
 describe("Attestation options test function", () => {
     it("Should return attestation options JSON", () => {
-        const user = new User();
-        user.$username = "johndoe@example.com";
-        user.$displayName = "John Doe";
-        user.$id = "IElyZHmTnbRzU8nsdyh6qw";
-
-        const request = {
-            attestation: "direct",
-            authenticatorSelection: {
-                authenticatorAttachment: "cross-platform",
-                residentKey: false,
-                userVerification: "preferred",
-            },
-            displayName: user.$displayName,
-            username: user.$username,
-        };
+        const user = new User("IElyZHmTnbRzU8nsdyh6qw", "johndoe@example.com", "John Doe");
+        const authenticatorSelection = 
+            new AuthenticatorSelection(false,
+                AuthenticatorAttachment["cross-platform"],
+                UserVerification.preferred);
+        const request = new AttestationOptionsRequest(
+            AttestationConveyance.direct,
+            authenticatorSelection,
+            user.$displayName,
+            user.$username);
 
         attestationService
             .options(user, request, [])
