@@ -37,7 +37,7 @@
     "cbor": "^5.1.0",
     "eccrypto": "^1.1.5",
     "elliptic": "^6.5.4",
-    "jsrsasign": "^8.0.24",
+    "jsrsasign": "^10.5.25",
     "node-rsa": "^1.1.1",
     "node-uuid": "^1.4.8",
     "uuid-buffer": "^1.0.3"
